@@ -14,4 +14,3 @@ runs
 data/*
 road_signs_detection/train/*
 road_signs_detection/test/*
-
