@@ -4,6 +4,7 @@ from pathlib import Path
 from glob import glob
 from xml.etree import ElementTree
 
+import pandas as pd
 from sklearn.model_selection import train_test_split
 
 
@@ -56,6 +57,15 @@ def parse_annotations_xml(filename):
     return annotations
 
 
+def create_annotations_list(annotations_path):
+    annotations_file_list = list(annotations_path.iterdir())[:]
+    annotations_list = []
+    for filename in annotations_file_list:
+        annotation = parse_annotations_xml(filename)
+        annotations_list.append(annotation)
+    return annotations_list
+
+
 if __name__ == '__main__':
 
     root_dir = get_abs_path(1)
@@ -73,3 +83,8 @@ if __name__ == '__main__':
     split_dataset(  dataset_images_dir, dataset_annotations_dir,
                     train_images_dir, train_annotations_dir,
                     test_images_dir, test_annotations_dir)
+
+    annotations_list = create_annotations_list(train_annotations_dir)
+
+    df = pd.DataFrame(annotations_list)
+    print(df.tail())
