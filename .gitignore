@@ -1,0 +1,17 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Pytorch logging
+runs
+
+# IDE
+.idea
+.vscode
+
+# Data
+data/*
+road_signs_detection/train/*
+road_signs_detection/test/*
+
