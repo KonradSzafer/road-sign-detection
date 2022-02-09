@@ -42,6 +42,9 @@ def split_dataset(dataset_images_path, dataset_annotations_path,
     for annotation in test_annotations:
         shutil.copy(annotation, test_annotations_path)
 
+    print('Train samples count:', len(train_images))
+    print('Test samples count:', len(test_images))
+
 
 def parse_annotations_xml(filename):
     root = ElementTree.parse(filename).getroot()
@@ -84,7 +87,12 @@ if __name__ == '__main__':
                     train_images_dir, train_annotations_dir,
                     test_images_dir, test_annotations_dir)
 
-    annotations_list = create_annotations_list(train_annotations_dir)
+    train_annotations_list = create_annotations_list(train_annotations_dir)
+    df = pd.DataFrame(train_annotations_list)
+    print('\nTrain stats:')
+    print(df['class'].value_counts())
 
-    df = pd.DataFrame(annotations_list)
-    print(df.tail())
+    test_annotations_list = create_annotations_list(test_annotations_dir)
+    df = pd.DataFrame(test_annotations_list)
+    print('\nTest stats:')
+    print(df['class'].value_counts())
