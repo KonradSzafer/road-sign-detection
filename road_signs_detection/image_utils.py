@@ -12,19 +12,23 @@ def get_bounding_box(row):
         row['ymax']])
 
 
-def resize_img_and_bb(img_path, bounding_box, new_width, new_height):
-
-    img = cv2.imread(img_path)
-    img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
-    img_width, img_height, _ = img.shape
-
+def create_mask(img_width, img_height, bounding_box):
     bb_x_min, bb_x_max, bb_y_min, bb_y_max = bounding_box
     mask = np.zeros((img_width, img_height, 3))
     cv2.rectangle(mask, (bb_x_min, bb_y_min), (bb_x_max, bb_y_max), (255,0,0), 1)
+    return mask
+
+
+def resize_img_and_bb(img_path, bounding_box, new_width, new_height):
+
+    img = cv2.imread(img_path)
+    img_width, img_height, _ = img.shape
 
     img = cv2.resize(img, dsize=(new_width, new_height), interpolation=cv2.INTER_NEAREST)
     # plt.imshow(img)
     # plt.show()
+
+    mask = create_mask(img_width, img_height, bounding_box)
     mask = cv2.resize(mask, dsize=(new_width, new_height), interpolation=cv2.INTER_NEAREST)
     # plt.imshow(mask)
     # plt.show()
