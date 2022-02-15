@@ -15,7 +15,7 @@ def get_bounding_box(row):
 def create_mask(img_width, img_height, bounding_box):
     bb_x_min, bb_x_max, bb_y_min, bb_y_max = bounding_box
     mask = np.zeros((img_width, img_height, 3))
-    cv2.rectangle(mask, (bb_x_min, bb_y_min), (bb_x_max, bb_y_max), (255,0,0), 1)
+    cv2.rectangle(mask, (bb_x_min, bb_y_min), (bb_x_max, bb_y_max), (255,0,0), 2)
     return mask
 
 
