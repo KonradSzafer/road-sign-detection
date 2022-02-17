@@ -2,6 +2,7 @@ import cv2
 import numpy as np
 import matplotlib.pyplot as plt
 from torchvision import transforms
+from data_utils import get_abs_path
 
 
 def get_bounding_box(row):
@@ -15,8 +16,17 @@ def get_bounding_box(row):
 def create_mask(img_width, img_height, bounding_box):
     bb_x_min, bb_x_max, bb_y_min, bb_y_max = bounding_box
     mask = np.zeros((img_width, img_height, 3))
-    cv2.rectangle(mask, (bb_x_min, bb_y_min), (bb_x_max, bb_y_max), (255,0,0), 2)
+    cv2.rectangle(mask, (int(bb_x_min), int(bb_y_min)), (int(bb_x_max), int(bb_y_max)), (255,0,0), 2)
     return mask
+
+
+def get_bb_from_mask(mask):
+    cols, rows = np.nonzero(mask[:,:,0])
+    bounding_box = np.array([np.min(rows),
+                            np.max(rows),
+                            np.min(cols),
+                            np.max(cols)])
+    return bounding_box
 
 
 def resize_img_and_bb(img_path, bounding_box, new_width, new_height):
@@ -33,16 +43,36 @@ def resize_img_and_bb(img_path, bounding_box, new_width, new_height):
     # plt.imshow(mask)
     # plt.show()
 
-    cols, rows = np.nonzero(mask[:,:,0])
-    bounding_box = np.array([np.min(rows),
-                            np.max(rows),
-                            np.min(cols),
-                            np.max(cols)])
-
+    bounding_box = get_bb_from_mask(mask)
     return img, bounding_box
+
+
+def rotate(img, bb, angle):
+    # rotate image
+    mask = create_mask(300, 400, bb)
+    # rotate mask
+    bb = get_bb_from_mask(mask)
+    return x, bb
+
+
+def plot_img_with_mask(img, bounding_box, title=''):
+    img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+    mask = create_mask( img.shape[0], img.shape[1], bounding_box)
+    plt.title(title)
+    plt.imshow(img)
+    plt.imshow(mask, alpha=0.6)
+    plt.show()
 
 
 if __name__ == '__main__':
 
-    img, bounding_box = resize_img_and_bb('./train/images/road1.png', np.array([20, 60, 10, 100]), 300, 450)
+    data_path = get_abs_path(1)
+    data_path = data_path / 'data' / 'images'
+    img_path = data_path / 'road54.png'
+
+    img, bounding_box = resize_img_and_bb(str(img_path), np.array([20, 60, 10, 100]), 300, 400)
+    plot_img_with_mask(img, bounding_box)
+
+    mask = create_mask(300, 400, bounding_box)
+    bounding_box = get_bb_from_mask(mask)
     print(bounding_box)
