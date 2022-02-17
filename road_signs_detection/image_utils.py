@@ -47,14 +47,6 @@ def resize_img_and_bb(img_path, bounding_box, new_width, new_height):
     return img, bounding_box
 
 
-def rotate(img, bb, angle):
-    # rotate image
-    mask = create_mask(300, 400, bb)
-    # rotate mask
-    bb = get_bb_from_mask(mask)
-    return x, bb
-
-
 def plot_img_with_mask(img, bounding_box, title=''):
     img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
     mask = create_mask(img.shape[0], img.shape[1], bounding_box)
