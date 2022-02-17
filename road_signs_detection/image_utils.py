@@ -13,10 +13,10 @@ def get_bounding_box(row):
         row['ymax']])
 
 
-def create_mask(img_width, img_height, bounding_box):
+def create_mask(img_width, img_height, bounding_box, r=255, g=0, b=0):
     bb_x_min, bb_x_max, bb_y_min, bb_y_max = bounding_box
     mask = np.zeros((img_width, img_height, 3))
-    cv2.rectangle(mask, (int(bb_x_min), int(bb_y_min)), (int(bb_x_max), int(bb_y_max)), (255,0,0), 2)
+    cv2.rectangle(mask, (int(bb_x_min), int(bb_y_min)), (int(bb_x_max), int(bb_y_max)), (r,g,b), 2)
     return mask
 
 
@@ -57,7 +57,7 @@ def rotate(img, bb, angle):
 
 def plot_img_with_mask(img, bounding_box, title=''):
     img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
-    mask = create_mask( img.shape[0], img.shape[1], bounding_box)
+    mask = create_mask(img.shape[0], img.shape[1], bounding_box)
     plt.title(title)
     plt.imshow(img)
     plt.imshow(mask, alpha=0.6)
