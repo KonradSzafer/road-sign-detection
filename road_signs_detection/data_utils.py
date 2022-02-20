@@ -39,3 +39,11 @@ def create_annotations_list(annotations_path):
         annotation = parse_annotations_xml(filename)
         annotations_list.append(annotation)
     return annotations_list
+
+
+if __name__ == '__main__':
+
+    root_path = get_abs_path(1)
+    filename = root_path / 'data/annotations/road129.xml'
+    anno = parse_annotations_xml(filename)
+    print(anno)
