@@ -45,7 +45,7 @@ Loss function equation:
     <img src="docs/loss_function.jpg">
 </p>
 
-Where:
+Where:\
 CF - Classification factor\
 BBF - Bounding box factor\
 \
