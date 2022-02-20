@@ -9,8 +9,10 @@ The dataset is very inbalanced, most of the samples belong to the speedlimit cla
 ### Loading data
 For easy dataset management, first the annotations are parsed by parsing the xmli and then the pandas datafame is created.\
 This solution provides efficient data management, allowing for easy spliting of data.\
-\
-![dataframe](docs/dataframe.jpg)
+
+<p align="center">
+    <img src="docs/dataframe.jpg">
+</p>
 
 ### Transforming data
 In the next step all images with corresponding bounding boxes are resized to 300px wide and 400px high.\
@@ -27,9 +29,11 @@ Dataset is divided into parts for training, validation and testing.
 
 ## Model
 The pretrained ResNet18 was used to build the model.\
-the last layers have been swapped and separate layers for classification and bounding box location have been added instead.\
-\
-![resnet](docs/resnet_18_architecture.png)
+the last layers have been swapped and separate layers for classification and bounding box location have been added instead.
+
+<p align="center">
+    <img src="docs/resnet_18_architecture.png">
+</p>
 
 ## Training
 Since the problem consists of two components, a special loss function must be constructed.\
@@ -37,9 +41,10 @@ The function contains two separate popular loss functions: Cross Entropy Loss an
 Each of these losses is multiplied by an appropriate factor.\
 \
 Loss function equation:
-```math
-loss = CF \cdot \sum_{}{}w(x)log(p_l(x)) + BBF \cdot \frac{1}{n}\sum_{}{}|x_i-x|
-```
+<p align="center">
+    <img src="docs/loss_function.jpg">
+</p>
+
 Where:
 CF - Classification factor\
 BBF - Bounding box factor\
