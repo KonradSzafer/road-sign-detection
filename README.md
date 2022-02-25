@@ -1,14 +1,14 @@
 # wdsi-semester-project
 
-This is final project of wdsi semester course. The goal of the project was to develop object detection and classification model for road signs dataset (https://www.kaggle.com/andrewmvd/road-sign-detection).
+This is final project of WDSI semester course. The goal of the project was to develop object detection and classification model for road signs dataset (https://www.kaggle.com/andrewmvd/road-sign-detection).
 
 ## Data
 Dataset contains 877 image samples of four different classes: Speedlimit, Stop, Traffic Light and Crosswalk.\
 The dataset is very inbalanced, most of the samples belong to the speedlimit class.
 
 ### Loading data
-For easy dataset management, first the annotations are parsed by parsing the xmli and then the pandas datafame is created.\
-This solution provides efficient data management, allowing for easy spliting of data.\
+For easy dataset management, first the annotations are parsed by parsing the XMLs and then the pandas datafame is created.\
+This solution provides efficient data management, allowing for easy spliting of data.
 
 <p align="center">
     <img src="docs/dataframe.jpg">
