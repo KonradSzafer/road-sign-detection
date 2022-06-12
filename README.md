@@ -1,6 +1,6 @@
-# wdsi-semester-project
+# road-sign-detection
 
-This is final project of WDSI semester course. The goal of the project was to develop object detection and classification model for road signs dataset (https://www.kaggle.com/andrewmvd/road-sign-detection).
+The goal of the project was to develop object detection and classification model for road signs dataset (https://www.kaggle.com/andrewmvd/road-sign-detection).
 
 ## Data
 Dataset contains 877 image samples of four different classes: Speedlimit, Stop, Traffic Light and Crosswalk.\
